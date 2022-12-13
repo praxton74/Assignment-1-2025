@@ -1,0 +1,1750 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "a70369c2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "6b40bedc",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cardekho=pd.read_csv('CAR DETAILS FROM CAR DEKHO.csv')"
+   ]
+  },
+  {
+   "cell_type": "raw",
+   "id": "b0de89db",
+   "metadata": {},
+   "source": [
+    "cardekho.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "e801edf2",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>name</th>\n",
+       "      <th>year</th>\n",
+       "      <th>selling_price</th>\n",
+       "      <th>km_driven</th>\n",
+       "      <th>fuel</th>\n",
+       "      <th>seller_type</th>\n",
+       "      <th>transmission</th>\n",
+       "      <th>owner</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Maruti 800 AC</td>\n",
+       "      <td>2007</td>\n",
+       "      <td>60000</td>\n",
+       "      <td>70000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Maruti Wagon R LXI Minor</td>\n",
+       "      <td>2007</td>\n",
+       "      <td>135000</td>\n",
+       "      <td>50000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Hyundai Verna 1.6 SX</td>\n",
+       "      <td>2012</td>\n",
+       "      <td>600000</td>\n",
+       "      <td>100000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Datsun RediGO T Option</td>\n",
+       "      <td>2017</td>\n",
+       "      <td>250000</td>\n",
+       "      <td>46000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Honda Amaze VX i-DTEC</td>\n",
+       "      <td>2014</td>\n",
+       "      <td>450000</td>\n",
+       "      <td>141000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>Second Owner</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                       name  year  selling_price  km_driven    fuel  \\\n",
+       "0             Maruti 800 AC  2007          60000      70000  Petrol   \n",
+       "1  Maruti Wagon R LXI Minor  2007         135000      50000  Petrol   \n",
+       "2      Hyundai Verna 1.6 SX  2012         600000     100000  Diesel   \n",
+       "3    Datsun RediGO T Option  2017         250000      46000  Petrol   \n",
+       "4     Honda Amaze VX i-DTEC  2014         450000     141000  Diesel   \n",
+       "\n",
+       "  seller_type transmission         owner  \n",
+       "0  Individual       Manual   First Owner  \n",
+       "1  Individual       Manual   First Owner  \n",
+       "2  Individual       Manual   First Owner  \n",
+       "3  Individual       Manual   First Owner  \n",
+       "4  Individual       Manual  Second Owner  "
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cardekho.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "6a239c06",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0       False\n",
+       "1       False\n",
+       "2        True\n",
+       "3       False\n",
+       "4       False\n",
+       "        ...  \n",
+       "4335    False\n",
+       "4336    False\n",
+       "4337    False\n",
+       "4338     True\n",
+       "4339    False\n",
+       "Name: selling_price, Length: 4340, dtype: bool"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "87fc99da",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>name</th>\n",
+       "      <th>year</th>\n",
+       "      <th>selling_price</th>\n",
+       "      <th>km_driven</th>\n",
+       "      <th>fuel</th>\n",
+       "      <th>seller_type</th>\n",
+       "      <th>transmission</th>\n",
+       "      <th>owner</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Hyundai Verna 1.6 SX</td>\n",
+       "      <td>2012</td>\n",
+       "      <td>600000</td>\n",
+       "      <td>100000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>Hyundai Xcent 1.2 Kappa S</td>\n",
+       "      <td>2016</td>\n",
+       "      <td>550000</td>\n",
+       "      <td>25000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>Hyundai Creta 1.6 VTVT S</td>\n",
+       "      <td>2015</td>\n",
+       "      <td>850000</td>\n",
+       "      <td>25000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>12</th>\n",
+       "      <td>Toyota Corolla Altis 1.8 VL CVT</td>\n",
+       "      <td>2018</td>\n",
+       "      <td>1650000</td>\n",
+       "      <td>25000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Dealer</td>\n",
+       "      <td>Automatic</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>15</th>\n",
+       "      <td>Hyundai Verna 1.6 SX</td>\n",
+       "      <td>2012</td>\n",
+       "      <td>600000</td>\n",
+       "      <td>100000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4313</th>\n",
+       "      <td>Ford Endeavour 2.2 Titanium AT 4X2</td>\n",
+       "      <td>2019</td>\n",
+       "      <td>2800000</td>\n",
+       "      <td>10000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Automatic</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4331</th>\n",
+       "      <td>Ford EcoSport 1.5 TDCi Titanium BSIV</td>\n",
+       "      <td>2015</td>\n",
+       "      <td>530000</td>\n",
+       "      <td>175000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>Third Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4332</th>\n",
+       "      <td>Mahindra Scorpio S2 7 Seater</td>\n",
+       "      <td>2015</td>\n",
+       "      <td>750000</td>\n",
+       "      <td>120000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4334</th>\n",
+       "      <td>Toyota Innova 2.5 VX (Diesel) 8 Seater BS IV</td>\n",
+       "      <td>2012</td>\n",
+       "      <td>600000</td>\n",
+       "      <td>170000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4338</th>\n",
+       "      <td>Hyundai Creta 1.6 CRDi SX Option</td>\n",
+       "      <td>2016</td>\n",
+       "      <td>865000</td>\n",
+       "      <td>90000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>1461 rows × 8 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                              name  year  selling_price  \\\n",
+       "2                             Hyundai Verna 1.6 SX  2012         600000   \n",
+       "6                        Hyundai Xcent 1.2 Kappa S  2016         550000   \n",
+       "8                         Hyundai Creta 1.6 VTVT S  2015         850000   \n",
+       "12                 Toyota Corolla Altis 1.8 VL CVT  2018        1650000   \n",
+       "15                            Hyundai Verna 1.6 SX  2012         600000   \n",
+       "...                                            ...   ...            ...   \n",
+       "4313            Ford Endeavour 2.2 Titanium AT 4X2  2019        2800000   \n",
+       "4331          Ford EcoSport 1.5 TDCi Titanium BSIV  2015         530000   \n",
+       "4332                  Mahindra Scorpio S2 7 Seater  2015         750000   \n",
+       "4334  Toyota Innova 2.5 VX (Diesel) 8 Seater BS IV  2012         600000   \n",
+       "4338              Hyundai Creta 1.6 CRDi SX Option  2016         865000   \n",
+       "\n",
+       "      km_driven    fuel seller_type transmission        owner  \n",
+       "2        100000  Diesel  Individual       Manual  First Owner  \n",
+       "6         25000  Petrol  Individual       Manual  First Owner  \n",
+       "8         25000  Petrol  Individual       Manual  First Owner  \n",
+       "12        25000  Petrol      Dealer    Automatic  First Owner  \n",
+       "15       100000  Diesel  Individual       Manual  First Owner  \n",
+       "...         ...     ...         ...          ...          ...  \n",
+       "4313      10000  Diesel  Individual    Automatic  First Owner  \n",
+       "4331     175000  Diesel  Individual       Manual  Third Owner  \n",
+       "4332     120000  Diesel  Individual       Manual  First Owner  \n",
+       "4334     170000  Diesel  Individual       Manual  First Owner  \n",
+       "4338      90000  Diesel  Individual       Manual  First Owner  \n",
+       "\n",
+       "[1461 rows x 8 columns]"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cardekho[cardekho['selling_price']>500000]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "aadc9ba0",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0        True\n",
+       "1        True\n",
+       "2        True\n",
+       "3       False\n",
+       "4        True\n",
+       "        ...  \n",
+       "4335     True\n",
+       "4336     True\n",
+       "4337     True\n",
+       "4338    False\n",
+       "4339    False\n",
+       "Name: year, Length: 4340, dtype: bool"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cardekho['year']<2015"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "9a19c731",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>name</th>\n",
+       "      <th>year</th>\n",
+       "      <th>selling_price</th>\n",
+       "      <th>km_driven</th>\n",
+       "      <th>fuel</th>\n",
+       "      <th>seller_type</th>\n",
+       "      <th>transmission</th>\n",
+       "      <th>owner</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Maruti 800 AC</td>\n",
+       "      <td>2007</td>\n",
+       "      <td>60000</td>\n",
+       "      <td>70000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Maruti Wagon R LXI Minor</td>\n",
+       "      <td>2007</td>\n",
+       "      <td>135000</td>\n",
+       "      <td>50000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Hyundai Verna 1.6 SX</td>\n",
+       "      <td>2012</td>\n",
+       "      <td>600000</td>\n",
+       "      <td>100000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Datsun RediGO T Option</td>\n",
+       "      <td>2017</td>\n",
+       "      <td>250000</td>\n",
+       "      <td>46000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Honda Amaze VX i-DTEC</td>\n",
+       "      <td>2014</td>\n",
+       "      <td>450000</td>\n",
+       "      <td>141000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>Second Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>...</th>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "      <td>...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4335</th>\n",
+       "      <td>Hyundai i20 Magna 1.4 CRDi (Diesel)</td>\n",
+       "      <td>2014</td>\n",
+       "      <td>409999</td>\n",
+       "      <td>80000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>Second Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4336</th>\n",
+       "      <td>Hyundai i20 Magna 1.4 CRDi</td>\n",
+       "      <td>2014</td>\n",
+       "      <td>409999</td>\n",
+       "      <td>80000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>Second Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4337</th>\n",
+       "      <td>Maruti 800 AC BSIII</td>\n",
+       "      <td>2009</td>\n",
+       "      <td>110000</td>\n",
+       "      <td>83000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>Second Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4338</th>\n",
+       "      <td>Hyundai Creta 1.6 CRDi SX Option</td>\n",
+       "      <td>2016</td>\n",
+       "      <td>865000</td>\n",
+       "      <td>90000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4339</th>\n",
+       "      <td>Renault KWID RXT</td>\n",
+       "      <td>2016</td>\n",
+       "      <td>225000</td>\n",
+       "      <td>40000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "<p>4340 rows × 8 columns</p>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                     name  year  selling_price  km_driven  \\\n",
+       "0                           Maruti 800 AC  2007          60000      70000   \n",
+       "1                Maruti Wagon R LXI Minor  2007         135000      50000   \n",
+       "2                    Hyundai Verna 1.6 SX  2012         600000     100000   \n",
+       "3                  Datsun RediGO T Option  2017         250000      46000   \n",
+       "4                   Honda Amaze VX i-DTEC  2014         450000     141000   \n",
+       "...                                   ...   ...            ...        ...   \n",
+       "4335  Hyundai i20 Magna 1.4 CRDi (Diesel)  2014         409999      80000   \n",
+       "4336           Hyundai i20 Magna 1.4 CRDi  2014         409999      80000   \n",
+       "4337                  Maruti 800 AC BSIII  2009         110000      83000   \n",
+       "4338     Hyundai Creta 1.6 CRDi SX Option  2016         865000      90000   \n",
+       "4339                     Renault KWID RXT  2016         225000      40000   \n",
+       "\n",
+       "        fuel seller_type transmission         owner  \n",
+       "0     Petrol  Individual       Manual   First Owner  \n",
+       "1     Petrol  Individual       Manual   First Owner  \n",
+       "2     Diesel  Individual       Manual   First Owner  \n",
+       "3     Petrol  Individual       Manual   First Owner  \n",
+       "4     Diesel  Individual       Manual  Second Owner  \n",
+       "...      ...         ...          ...           ...  \n",
+       "4335  Diesel  Individual       Manual  Second Owner  \n",
+       "4336  Diesel  Individual       Manual  Second Owner  \n",
+       "4337  Petrol  Individual       Manual  Second Owner  \n",
+       "4338  Diesel  Individual       Manual   First Owner  \n",
+       "4339  Petrol  Individual       Manual   First Owner  \n",
+       "\n",
+       "[4340 rows x 8 columns]"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cardekho[cardekho['year']>1500]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "ee12c5c5",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0       False\n",
+       "1       False\n",
+       "2       False\n",
+       "3       False\n",
+       "4       False\n",
+       "        ...  \n",
+       "4335    False\n",
+       "4336    False\n",
+       "4337    False\n",
+       "4338    False\n",
+       "4339    False\n",
+       "Name: km_driven, Length: 4340, dtype: bool"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cardekho['km_driven']<100"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "befaab19",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>name</th>\n",
+       "      <th>year</th>\n",
+       "      <th>selling_price</th>\n",
+       "      <th>km_driven</th>\n",
+       "      <th>fuel</th>\n",
+       "      <th>seller_type</th>\n",
+       "      <th>transmission</th>\n",
+       "      <th>owner</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>1312</th>\n",
+       "      <td>Mahindra Quanto C6</td>\n",
+       "      <td>2014</td>\n",
+       "      <td>250000</td>\n",
+       "      <td>1</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>Second Owner</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                    name  year  selling_price  km_driven    fuel seller_type  \\\n",
+       "1312  Mahindra Quanto C6  2014         250000          1  Diesel  Individual   \n",
+       "\n",
+       "     transmission         owner  \n",
+       "1312       Manual  Second Owner  "
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cardekho[cardekho['km_driven']<100]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "4626cb71",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "Matplotlib is building the font cache; this may take a moment.\n"
+     ]
+    }
+   ],
+   "source": [
+    "from matplotlib import pyplot as plt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "id": "f7557b46",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import seaborn as sns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1e902d61",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sns.scatterplot(x='selling_price',y='km_driven',data=cardekho)\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "id": "d11892ae",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>name</th>\n",
+       "      <th>year</th>\n",
+       "      <th>selling_price</th>\n",
+       "      <th>km_driven</th>\n",
+       "      <th>fuel</th>\n",
+       "      <th>seller_type</th>\n",
+       "      <th>transmission</th>\n",
+       "      <th>owner</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Maruti 800 AC</td>\n",
+       "      <td>2007</td>\n",
+       "      <td>60000</td>\n",
+       "      <td>70000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Maruti Wagon R LXI Minor</td>\n",
+       "      <td>2007</td>\n",
+       "      <td>135000</td>\n",
+       "      <td>50000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Hyundai Verna 1.6 SX</td>\n",
+       "      <td>2012</td>\n",
+       "      <td>600000</td>\n",
+       "      <td>100000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Datsun RediGO T Option</td>\n",
+       "      <td>2017</td>\n",
+       "      <td>250000</td>\n",
+       "      <td>46000</td>\n",
+       "      <td>Petrol</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>First Owner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Honda Amaze VX i-DTEC</td>\n",
+       "      <td>2014</td>\n",
+       "      <td>450000</td>\n",
+       "      <td>141000</td>\n",
+       "      <td>Diesel</td>\n",
+       "      <td>Individual</td>\n",
+       "      <td>Manual</td>\n",
+       "      <td>Second Owner</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                       name  year  selling_price  km_driven    fuel  \\\n",
+       "0             Maruti 800 AC  2007          60000      70000  Petrol   \n",
+       "1  Maruti Wagon R LXI Minor  2007         135000      50000  Petrol   \n",
+       "2      Hyundai Verna 1.6 SX  2012         600000     100000  Diesel   \n",
+       "3    Datsun RediGO T Option  2017         250000      46000  Petrol   \n",
+       "4     Honda Amaze VX i-DTEC  2014         450000     141000  Diesel   \n",
+       "\n",
+       "  seller_type transmission         owner  \n",
+       "0  Individual       Manual   First Owner  \n",
+       "1  Individual       Manual   First Owner  \n",
+       "2  Individual       Manual   First Owner  \n",
+       "3  Individual       Manual   First Owner  \n",
+       "4  Individual       Manual  Second Owner  "
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cardekho.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "480e0fd7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y=cardekho[['selling_price']]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "id": "79b18670",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x=cardekho[['km_driven']]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "id": "4c6e14d4",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.model_selection import train_test_split"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "id": "c95278cd",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "id": "7547396d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>km_driven</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>194</th>\n",
+       "      <td>90000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3209</th>\n",
+       "      <td>40000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3018</th>\n",
+       "      <td>157000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2643</th>\n",
+       "      <td>90000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1283</th>\n",
+       "      <td>64700</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      km_driven\n",
+       "194       90000\n",
+       "3209      40000\n",
+       "3018     157000\n",
+       "2643      90000\n",
+       "1283      64700"
+      ]
+     },
+     "execution_count": 38,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x_train.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "id": "834dfe69",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>km_driven</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>3009</th>\n",
+       "      <td>100000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2026</th>\n",
+       "      <td>38000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3213</th>\n",
+       "      <td>104000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3836</th>\n",
+       "      <td>40000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2217</th>\n",
+       "      <td>10500</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      km_driven\n",
+       "3009     100000\n",
+       "2026      38000\n",
+       "3213     104000\n",
+       "3836      40000\n",
+       "2217      10500"
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "x_test.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "id": "44656733",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>selling_price</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>194</th>\n",
+       "      <td>170000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3209</th>\n",
+       "      <td>425000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3018</th>\n",
+       "      <td>509999</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2643</th>\n",
+       "      <td>240000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1283</th>\n",
+       "      <td>78000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      selling_price\n",
+       "194          170000\n",
+       "3209         425000\n",
+       "3018         509999\n",
+       "2643         240000\n",
+       "1283          78000"
+      ]
+     },
+     "execution_count": 40,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "y_train.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "id": "28f9767a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>selling_price</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>3009</th>\n",
+       "      <td>400000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2026</th>\n",
+       "      <td>381000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3213</th>\n",
+       "      <td>420000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3836</th>\n",
+       "      <td>600000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2217</th>\n",
+       "      <td>300000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      selling_price\n",
+       "3009         400000\n",
+       "2026         381000\n",
+       "3213         420000\n",
+       "3836         600000\n",
+       "2217         300000"
+      ]
+     },
+     "execution_count": 41,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "y_test.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "id": "aad37786",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.linear_model import LinearRegression"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "id": "93e1fff1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "lr=LinearRegression()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "id": "4a98529a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "LinearRegression()"
+      ]
+     },
+     "execution_count": 45,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    " lr.fit(x_train,y_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "id": "b804aa6c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "LinearRegression()"
+      ]
+     },
+     "execution_count": 46,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "lr.fit(x_train,y_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "id": "a47b92d9",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y_pred=lr.predict(x_test)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "id": "d2d816db",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>selling_price</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>3009</th>\n",
+       "      <td>400000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2026</th>\n",
+       "      <td>381000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3213</th>\n",
+       "      <td>420000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3836</th>\n",
+       "      <td>600000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2217</th>\n",
+       "      <td>300000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      selling_price\n",
+       "3009         400000\n",
+       "2026         381000\n",
+       "3213         420000\n",
+       "3836         600000\n",
+       "2217         300000"
+      ]
+     },
+     "execution_count": 49,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "y_test.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "id": "3c27cc39",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[416720.47672019],\n",
+       "       [572496.42578321],\n",
+       "       [406670.41549032],\n",
+       "       [567471.39516827]])"
+      ]
+     },
+     "execution_count": 58,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "y_pred[0:4]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "id": "e9c4b31c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.metrics import mean_squared_error"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
+   "id": "510fbe31",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "322375396937.83307"
+      ]
+     },
+     "execution_count": 60,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "mean_squared_error(y_test,y_pred)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 64,
+   "id": "5c8d1037",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# model-2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 66,
+   "id": "988db781",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from sklearn.preprocessing import LabelEncoder"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 68,
+   "id": "ae067f33",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "le=LabelEncoder()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 69,
+   "id": "a177e079",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cardekho.year=le.fit_transform(cardekho.year)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 70,
+   "id": "de96355c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cardekho.fuel=le.fit_transform(cardekho.fuel)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 71,
+   "id": "a49c820e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cardekho.seller_type=le.fit_transform(cardekho.seller_type)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 75,
+   "id": "e0bdd864",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cardekho.transmission=le.fit_transform(cardekho.transmission)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 76,
+   "id": "add5c1e7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cardekho.owner=le.fit_transform(cardekho.owner) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 78,
+   "id": "600899d8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "cardekho.name=le.fit_transform(cardekho.name)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 79,
+   "id": "e2306e26",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>name</th>\n",
+       "      <th>year</th>\n",
+       "      <th>selling_price</th>\n",
+       "      <th>km_driven</th>\n",
+       "      <th>fuel</th>\n",
+       "      <th>seller_type</th>\n",
+       "      <th>transmission</th>\n",
+       "      <th>owner</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>775</td>\n",
+       "      <td>13</td>\n",
+       "      <td>60000</td>\n",
+       "      <td>70000</td>\n",
+       "      <td>4</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1041</td>\n",
+       "      <td>13</td>\n",
+       "      <td>135000</td>\n",
+       "      <td>50000</td>\n",
+       "      <td>4</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>505</td>\n",
+       "      <td>18</td>\n",
+       "      <td>600000</td>\n",
+       "      <td>100000</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>118</td>\n",
+       "      <td>23</td>\n",
+       "      <td>250000</td>\n",
+       "      <td>46000</td>\n",
+       "      <td>4</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>279</td>\n",
+       "      <td>20</td>\n",
+       "      <td>450000</td>\n",
+       "      <td>141000</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   name  year  selling_price  km_driven  fuel  seller_type  transmission  \\\n",
+       "0   775    13          60000      70000     4            1             1   \n",
+       "1  1041    13         135000      50000     4            1             1   \n",
+       "2   505    18         600000     100000     1            1             1   \n",
+       "3   118    23         250000      46000     4            1             1   \n",
+       "4   279    20         450000     141000     1            1             1   \n",
+       "\n",
+       "   owner  \n",
+       "0      0  \n",
+       "1      0  \n",
+       "2      0  \n",
+       "3      0  \n",
+       "4      2  "
+      ]
+     },
+     "execution_count": 79,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cardekho.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "id": "b60eb04f",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y=cardekho[['selling_price']]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 80,
+   "id": "ed5a5c3b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x=cardekho[['km_driven','year','fuel','seller_type','transmission','owner',]]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 81,
+   "id": "d5ad2d46",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 82,
+   "id": "2306f43a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "lr2=LinearRegression()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 83,
+   "id": "4e7e8728",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "LinearRegression()"
+      ]
+     },
+     "execution_count": 83,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "lr2.fit(x_train,y_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 84,
+   "id": "a9178bc8",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "y_pred=lr2.predict(x_test)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 85,
+   "id": "dcb93287",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "214971806273.4772"
+      ]
+     },
+     "execution_count": 85,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "mean_squared_error(y_test,y_pred)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "f384ab90",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
